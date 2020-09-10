@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import CollectionPage from '../collection/collection'
+import CollectionPage from '../collection/collectionpage'
 import CollectionsOverview from "../../components/collectionsOverview/collectionsOverview";
 import "./shop.scss";
 
@@ -13,6 +13,7 @@ import "./shop.scss";
         path={`${match.path}/:collectionId`}
         component={CollectionPage}
       />
+     
     </div>
   );
 };
