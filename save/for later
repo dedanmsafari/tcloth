@@ -1,0 +1,15 @@
+import {
+  auth,
+  createUserProfileDocument,
+  addCollectionAndDocuments,
+} from "./firebase/firebase.utils";
+
+
+import { selectCollectionsForPreview } from "./redux/shop/shopSelectors"
+import { selectCollectionsForPreview } from "./redux/shop/shopSelectors"
+
+
+  addCollectionAndDocuments(
+        "collection",
+        collectionsArray.map(({ title, items }) => ({ title, items }))
+      );
