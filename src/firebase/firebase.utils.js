@@ -26,7 +26,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
       console.log("error creating user", error.message);
     }
   }
-
   return userRef;
 };
 
@@ -41,7 +40,26 @@ export const addCollectionAndDocuments = async (
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
- return await batch.commit();
+  return await batch.commit();
+};
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+return transformedCollection.reduce((prevValue, currentValue) => {
+    prevValue[currentValue.title.toLowerCase()] = currentValue;
+    return prevValue;
+  }, {});
+
 };
 
 firebase.initializeApp(config);
