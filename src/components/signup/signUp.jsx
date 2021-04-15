@@ -18,7 +18,7 @@ class SignUp extends React.Component {
     e.preventDefault();
     const { displayName, confirmPassword, email, password } = this.state;
     if (password !== confirmPassword) {
-      alert("Passwords so not match");
+      alert("Passwords do not match");
       return;
     }
     try {
@@ -27,7 +27,8 @@ class SignUp extends React.Component {
         password
       );
 
-      await createUserProfileDocument(user, { displayName });
+      await createUserProfileDocument(user, { displayName : displayName});
+     //clear the form afterwards
       this.setState({
         displayName: "",
         email: "",
@@ -54,7 +55,7 @@ class SignUp extends React.Component {
             name="displayName"
             value={displayName}
             onChange={this.handleChange}
-            label="Display Name"
+            label=" Name"
             required
           />
           <FormInput
