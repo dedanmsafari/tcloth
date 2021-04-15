@@ -1,16 +1,16 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
+import firebase from 'firebase/app'; //only utility library
+import 'firebase/firestore'; //database
+import 'firebase/auth'; //auth
 
 const config = {
-  apiKey: "AIzaSyDr9PYnbBzQxt9W6pNg7HfKdVm5z_5B-fg",
-  authDomain: "tcloth-e5ab4.firebaseapp.com",
-  databaseURL: "https://tcloth-e5ab4.firebaseio.com",
-  projectId: "tcloth-e5ab4",
-  storageBucket: "tcloth-e5ab4.appspot.com",
-  messagingSenderId: "1079040013023",
-  appId: "1:1079040013023:web:da274b79b4995b7f396f6a",
-  measurementId: "G-0B2R9HNTRZ",
+  apiKey: 'AIzaSyDr9PYnbBzQxt9W6pNg7HfKdVm5z_5B-fg',
+  authDomain: 'tcloth-e5ab4.firebaseapp.com',
+  databaseURL: 'https://tcloth-e5ab4.firebaseio.com',
+  projectId: 'tcloth-e5ab4',
+  storageBucket: 'tcloth-e5ab4.appspot.com',
+  messagingSenderId: '1079040013023',
+  appId: '1:1079040013023:web:da274b79b4995b7f396f6a',
+  measurementId: 'G-0B2R9HNTRZ',
 };
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
@@ -23,7 +23,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     try {
       await userRef.set({ displayName, email, createdAt, ...additionalData });
     } catch (error) {
-      console.log("error creating user", error.message);
+      console.log('error creating user', error.message);
     }
   }
   return userRef;
@@ -55,11 +55,10 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     };
   });
 
-return transformedCollection.reduce((prevValue, currentValue) => {
+  return transformedCollection.reduce((prevValue, currentValue) => {
     prevValue[currentValue.title.toLowerCase()] = currentValue;
     return prevValue;
   }, {});
-
 };
 
 firebase.initializeApp(config);
@@ -68,7 +67,7 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
+provider.setCustomParameters({ prompt: 'select_account' }); //for the pop up
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
